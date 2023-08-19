@@ -1,0 +1,63 @@
+.containers{
+  width: 100% !important;
+}
+
+
+
+  body{
+    font-family: 'Public Sans', sans-serif;
+  }
+
+
+  /* font-family: "Public Sans";
+  src: ("https://fonts.google.com/specimen/Public+Sans"); */
+
+
+
+.dark-blue{
+background:  #2d314d;
+}
+
+.light-grey{
+ background-color: #fafafa
+}
+.lime-green{
+  background: #31d35c
+  }
+
+  .bright-cyan{
+    background: #2bb7da
+    }
+    
+    .gradient{
+      background: linear-gradient(90deg, rgba(49,211,92,1) 0%, rgba(43,183,218,1) 71%);
+      ;
+    }
+
+    .buttons{
+      border-radius: 1pc;
+      color: white;
+      border: none;
+      height: 40px;
+
+      width: 40%;
+    }
+
+    .buttons2{
+      border-radius: 1pc;
+      color: white;
+      border: none;
+      height: 45px;
+      width: 30%;
+    }
+
+    .buttons3{
+      border-radius: 1pc;
+      color: white;
+      border: none;
+      height: 45px;
+      width: 100%;
+    }
+    .hero-bg{
+      background-image: url(../src/assets/images/bg-intro-desktop.svg);
+    }
