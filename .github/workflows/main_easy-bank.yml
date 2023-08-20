@@ -1,4 +1,4 @@
-name: Unit tests, Final Build, CodeQL analysis, Docker image/container creation and Deployment to Azure
+name: Final Build, CodeQL analysis, Docker image/container creation and Deployment to Azure
 
 on:
   pull_request:
@@ -25,6 +25,7 @@ jobs:
 
   codeql-analysis:
     runs-on: ubuntu-latest
+    needs: build
     strategy:
       fail-fast: false
       matrix:
