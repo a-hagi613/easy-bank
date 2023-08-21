@@ -13,7 +13,7 @@ export default function Heros() {
         <br />
         <br />
         <br />
-        <h1 className="px-5">Next Generation Digital Lanking</h1>
+        <h1 className="px-5">Past Generation Digital Banking</h1>
         <p className="px-5 mt-3 text-secondary">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur
           libero nesciunt aut consequatur delectus fugit nobis fuga, natus
