@@ -53,6 +53,7 @@ jobs:
           category: "/language:${{matrix.language}}"
 
   close_pull_request_job:
+    needs: codeql-analysis
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
@@ -63,3 +64,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_GROUND_04C295510 }}
           action: "close"
+          app_location: dist
