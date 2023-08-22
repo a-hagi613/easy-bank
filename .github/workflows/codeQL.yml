@@ -1,4 +1,4 @@
-name: CodeQL Analysis
+name: Final Build-Unit Tests-CodeQL Analysis
 
 on:
   pull_request:
@@ -7,8 +7,40 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm i
+      - run: npm run build
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm i
+      - run: npm run test
+
   codeql-analysis:
     runs-on: ubuntu-latest
+    needs: unit-tests
     strategy:
       fail-fast: false
       matrix:
