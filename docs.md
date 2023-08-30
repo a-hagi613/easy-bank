@@ -21,7 +21,24 @@ GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) solutio
 ---
 
 
-# Workflow Documentation Example
+# Quick Guide to Creating GitHub Actions
+
+Creating a GitHub Action involves setting up a specific directory structure in your repository and creating a workflow file (YAML format) that defines the actions to be performed.
+
+## Step 1: Set Up the Workflow Directory
+
+In your GitHub repository, you need to create a directory named `.github/workflows`. GitHub looks for workflow files in this directory.
+
+You can create the directory using the GitHub web interface or by cloning your repository and creating the directory locally.
+
+## Step 2: Create a Workflow File
+
+In the `.github/workflows` directory, create a new file with a `.yml` or `.yaml` extension. The name of the file will be the name of your workflow
+
+
+
+
+# Workflow File Example
 ```yaml
 name: Final Build-Unit Tests-CodeQL Analysis
 
@@ -180,8 +197,77 @@ This workflow ensures that every pull request is built successfully, passes unit
 # Here is a visual example of how our workflow would run if a pull request was to be made:
 
 - create pull request
-- checck to see if all actions pass
+- check to see if all actions pass
 - merge pull request
 
 https://github.com/a-hagi613/easy-bank/assets/92589940/4048e80c-24db-4407-9490-425741eedd4e
+
+# Deploying Our Project
+
+By closing the pull request and merging the valid code into our main branch we have completed the first part of the CICD pipeline, which is continuous intergration. Now we can continue with the second part, which is continuous delpoyment. To demonstrate  we will create a new workflow that will deploy our updated code to Micosoft Azure's Static Web App service.  Microsoft Azure is a cloud computing service created by Microsoft for building, testing, deploying, and managing applications and services through Microsoft-managed data centers. It provides a range of cloud services, including those for computing, analytics, storage, and networking.
+
+## Azure Static Web Apps
+
+Azure Static Web Apps is a service that automatically builds and deploys full-stack web apps to Azure from a GitHub repository. This service is ideal for apps with static frontends and optional dynamic backends powered by serverless APIs.
+
+### Why Use Azure Static Web Apps?
+
+1. **Automated CI/CD**: Azure Static Web Apps automatically builds and deploys your app on every push to your repository.
+
+2. **Integrated with GitHub**: The service is directly integrated with GitHub, making it easy to set up deployment workflows.
+
+3. **Serverless APIs**: You can create serverless APIs in your preferred language that are automatically versioned and deployed alongside your static content.
+
+4. **Free SSL Certificates**: Azure Static Web Apps automatically creates a free SSL certificate for your app and takes care of renewing it as well.
+
+---
+
+# Deployment Workflow File
+
+```yaml
+name: Azure Static Web Apps Deployment
+
+on:
+  push:
+    branches:
+      - main
+```
+
+The provided workflow is named "Azure Static Web Apps Deployment". It is triggered on push events to the main branch. The workflow consists of a single job: `build_and_deploy_job`.
+
+## Job: Build and Deploy Job
+
+This job runs on the latest version of Ubuntu. It is designed to build and deploy your app to Azure Static Web Apps.
+
+```yaml
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/" # App source code path
+          api_location: "" # Api source code path - optional
+          output_location: "/dist" # Built app content directory - optional
+```
+
+### Steps:
+
+1. **Checkout**: The `actions/checkout@v2` action checks out your repository onto the runner, so the workflow can access it. The `submodules: true` option ensures that all Git submodules are also checked out.
+
+2. **Build And Deploy**: The `Azure/static-web-apps-deploy@v1` action builds and deploys your app to Azure Static Web Apps. It uses the `AZURE_STATIC_WEB_APPS_API_TOKEN_` secret for authentication with Azure. The `GITHUB_TOKEN` secret is used for authentication with GitHub. The `action: "upload"` option specifies that the action should upload the built app to Azure. The `app_location: "/"` option specifies the location of the app's source code. The `output_location: "/dist"` option specifies the location of the built app content.
+3. **Deployment Successful**: Once the deployment is succesful a link will be provided to the url of your deployed project.
+
+![image](https://github.com/a-hagi613/easy-bank/assets/92589940/567a6763-cb7a-4f2c-9d22-cb204d744f3a)
+![image](https://github.com/a-hagi613/easy-bank/assets/92589940/8d6546e0-de88-4af0-b5da-6214d9a39916)
 
