@@ -142,15 +142,8 @@ CodeQL converts your codebase into a relational database, or a 'codebase-as-a-da
 
 5. **Integration with GitHub**: CodeQL is deeply integrated with GitHub. The results of the CodeQL analysis are available in the GitHub Security tab of the repository.
 
-## Why Use CodeQL?
+6 **Regulatory Compliance**: CodeQL can help in achieving compliance with coding standards and regulations, which is particularly useful in industries like healthcare or finance.
 
-1. **Proactive Security**: CodeQL helps in identifying the vulnerabilities during the development phase itself, even before the code is deployed. This proactive approach helps in reducing the potential damage.
-
-2. **Code Quality**: By identifying bugs and non-standard code patterns, CodeQL helps in improving the overall quality of the code.
-
-3. **Regulatory Compliance**: CodeQL can help in achieving compliance with coding standards and regulations, which is particularly useful in industries like healthcare or finance.
-
-4. **Knowledge Sharing**: CodeQL queries can be shared and reused, allowing teams to benefit from the security expertise of others.
 
 
 This job performs a CodeQL (Code Query Language) analysis to find potential vulnerabilities in the code. It runs on the latest version of Ubuntu and depends on the `unit-tests` job.
