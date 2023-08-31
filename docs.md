@@ -1,6 +1,6 @@
-# GitHub Actions: An Overview
+# GitHub Actions Continuous Integration/Continuous Deployment (CI/CD) Pipeline: An Overview
 
-GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) solution provided by GitHub. It allows you to automate, customize, and execute your software development workflows right in your GitHub repository. You can write individual tasks, called actions, and combine them to create a custom workflow.
+GitHub Actions is a CI/CD solution provided by GitHub. It allows you to automate, customize, and execute your software development workflows right in your GitHub repository. You can write individual tasks, called actions, and combine them to create a custom workflow.
 
 
 
@@ -142,11 +142,11 @@ CodeQL converts your codebase into a relational database, or a 'codebase-as-a-da
 
 5. **Integration with GitHub**: CodeQL is deeply integrated with GitHub. The results of the CodeQL analysis are available in the GitHub Security tab of the repository.
 
-6 **Regulatory Compliance**: CodeQL can help in achieving compliance with coding standards and regulations, which is particularly useful in industries like healthcare or finance.
+6. **Regulatory Compliance**: CodeQL can help in achieving compliance with coding standards and regulations, which is particularly useful in industries like healthcare or finance.
 
 
 
-This job performs a CodeQL (Code Query Language) analysis to find potential vulnerabilities in the code. It runs on the latest version of Ubuntu and depends on the `unit-tests` job.
+This job performs a CodeQL (Code Query Language) analysis to find potential vulnerabilities in the code. It runs on the latest version of Ubuntu and depends on the `unit-tests` job passing to fire off.
 
 ```yaml
 codeql-analysis:
@@ -183,7 +183,7 @@ codeql-analysis:
 
 4. **Perform CodeQL Analysis**: The `github/codeql-action/analyze@v2` action performs the actual CodeQL analysis. The results are then uploaded to GitHub, and can be viewed in the security tab of the repository.
 
-This workflow ensures that every pull request is built successfully, passes unit tests, and does not introduce any new potential security vulnerabilities as detected by CodeQL. It helps maintain the code quality and security of the project.
+This workflow ensures that every pull request to the main branch is built successfully, passes unit tests, and does not introduce any new potential security vulnerabilities as detected by CodeQL. It helps maintain the code quality and security of the project.
 
 
 
